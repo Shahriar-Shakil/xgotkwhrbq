@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { TMDBProvider } from "@/src/providers/tmdb-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,17 +25,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const apiKey = process.env.TMDB_API_KEY!;
+
   return (
     <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider defaultOpen={false}>
-          <AppSidebar />
-          <SidebarInset className="w-full">
-            <main className="w-full min-h-screen">{children}</main>
-          </SidebarInset>
-        </SidebarProvider>
+        <TMDBProvider apiKey={apiKey}>
+          <SidebarProvider defaultOpen={false}>
+            <AppSidebar />
+            <SidebarInset className="w-full">
+              <main className="w-full min-h-screen">{children}</main>
+            </SidebarInset>
+          </SidebarProvider>
+        </TMDBProvider>
       </body>
     </html>
   );
