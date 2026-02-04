@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Calendar, ChevronLeft, ChevronRight, Globe, Star } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/lib/utils";
 
 interface Movie {
   id: number;
