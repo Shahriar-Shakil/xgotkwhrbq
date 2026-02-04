@@ -1,22 +1,6 @@
 import { Calendar, Star } from "lucide-react";
 import Image from "next/image";
-
-interface Movie {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
+import { Movie } from "@/src/types/tmdb";
 
 interface MovieCardProps {
   movie: Movie;
@@ -28,7 +12,7 @@ export function MovieCard({ movie }: MovieCardProps) {
     : "/placeholder-movie.jpg";
 
   return (
-    <div className="group relative overflow-hidden rounded-xl glass hover:glass-strong transition-all duration-600 hover:scale-105 hover:-translate-y-2">
+    <div className="group relative overflow-hidden rounded-xl glass hover:glass-strong transition-all duration-600  hover:-translate-y-2">
       {/* Movie Poster */}
       <div className="relative aspect-[2/3] overflow-hidden bg-muted">
         <Image
