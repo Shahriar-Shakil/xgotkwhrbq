@@ -2,7 +2,12 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppSidebar } from "@/src/components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/src/components/ui/sidebar";
+import Header from "@/src/components/Header";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/src/components/ui/sidebar";
 import { TMDBProvider } from "@/src/providers/tmdb-provider";
 
 const geistSans = Geist({
@@ -35,9 +40,13 @@ export default function RootLayout({
         <TMDBProvider apiKey={apiKey}>
           <SidebarProvider defaultOpen={false}>
             <AppSidebar />
-            <SidebarInset className="w-full">
-              <main className="w-full min-h-screen">{children}</main>
-            </SidebarInset>
+            <div className="flex-1 flex flex-col w-full">
+              {/* Header with Search and Sidebar Trigger */}
+              <Header />
+
+              {/* Page Content */}
+              <main className="flex-1">{children}</main>
+            </div>
           </SidebarProvider>
         </TMDBProvider>
       </body>

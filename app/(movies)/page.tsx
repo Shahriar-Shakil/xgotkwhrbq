@@ -13,7 +13,7 @@ export default async function Home() {
   const genres = await tmdb.genres.movie_list();
   // console.log("Genres:", genres);
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen absolute top-0">
       <HeroSection movies={movies.results} />
       <GenreSection genres={genres.genres} />
       <MovieCarouselSection
