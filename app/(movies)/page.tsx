@@ -1,6 +1,6 @@
-import { GenreSection } from "@/components/GenreSection";
-import { HeroSection } from "@/components/HeroSection";
-import { MovieCarouselSection } from "@/components/MovieCarouselSection";
+import { GenreSection } from "@/src/components/GenreSection";
+import { HeroSection } from "@/src/components/HeroSection";
+import { MovieCarouselSection } from "@/src/components/MovieCarouselSection";
 import { tmdb } from "@/src/lib/tmdb";
 
 export const revalidate = 3600; // Revalidate every 1 hour (ISR)
@@ -11,7 +11,7 @@ export default async function Home() {
   const popular = await tmdb.movie_lists.popular({ page: 1 });
   const upcoming = await tmdb.movie_lists.upcoming({ page: 1 });
   const genres = await tmdb.genres.movie_list();
-  console.log("Genres:", genres);
+  // console.log("Genres:", genres);
   return (
     <div className="min-h-screen">
       <HeroSection movies={movies.results} />

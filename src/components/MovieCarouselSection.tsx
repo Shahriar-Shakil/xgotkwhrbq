@@ -3,8 +3,8 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
-import { MovieCard } from "@/components/Moviecard";
-import { Button } from "@/components/ui/button";
+import { MovieCard } from "@/src/components/Moviecard";
+import { Button } from "@/src/components/ui/button";
 import { useTmdb } from "@/src/providers/tmdb-provider";
 import { Movie } from "@/src/types/tmdb";
 
