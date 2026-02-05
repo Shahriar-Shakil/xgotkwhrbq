@@ -23,6 +23,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ movies }: HeroSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "center",
@@ -41,8 +42,17 @@ export function HeroSection({ movies }: HeroSectionProps) {
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
-    setCurrentIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+    const newIndex = emblaApi.selectedScrollSnap();
+
+    // Trigger transition effect
+    if (newIndex !== currentIndex) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex(newIndex);
+        setIsTransitioning(false);
+      }, 150);
+    }
+  }, [emblaApi, currentIndex]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -57,13 +67,16 @@ export function HeroSection({ movies }: HeroSectionProps) {
 
   return (
     <div className="relative w-full h-full md:h-[80vh] lg:h-[85vh] overflow-hidden">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 -top-1/2 md:top-0">
         <Image
           key={currentIndex}
           src={backdropUrl}
           alt={currentMovie?.title || "Movie backdrop"}
           fill
-          className="object-cover object-center transition-opacity duration-700"
+          className={cn(
+            "object-contain md:object-cover object-center transition-opacity duration-700 ease-in-out",
+            isTransitioning ? "opacity-0" : "opacity-100",
+          )}
           priority
           quality={90}
         />
@@ -72,7 +85,7 @@ export function HeroSection({ movies }: HeroSectionProps) {
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
-      <div className="relative z-10 h-full flex flex-col justify-end pb-12 md:pb-16 lg:pb-20 px-4 md:px-8 lg:px-12">
+      <div className="relative z-10 h-full flex flex-col justify-end py-20 md:pb-16 lg:pb-20 px-4 md:px-8 lg:px-12">
         <div className="container w-full mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
             <div className="space-y-6">
@@ -84,12 +97,22 @@ export function HeroSection({ movies }: HeroSectionProps) {
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl">
+              <h1
+                className={cn(
+                  "text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl transition-opacity duration-300",
+                  isTransitioning ? "opacity-0" : "opacity-100",
+                )}
+              >
                 {currentMovie?.title}
               </h1>
 
               {/* Meta Information */}
-              <div className="flex flex-wrap items-center gap-4 text-white/90">
+              <div
+                className={cn(
+                  "flex flex-wrap items-center gap-2 md:gap-4 text-white/90 transition-opacity duration-300",
+                  isTransitioning ? "opacity-0" : "opacity-100",
+                )}
+              >
                 <div className="flex items-center gap-2 glass-subtle px-3 py-1.5 rounded-full">
                   <Calendar className="w-4 h-4" />
                   <span className="text-sm font-medium">
@@ -116,7 +139,12 @@ export function HeroSection({ movies }: HeroSectionProps) {
                 </div>
               </div>
 
-              <p className="text-white/80 text-base md:text-lg leading-relaxed line-clamp-3 max-w-2xl drop-shadow-lg">
+              <p
+                className={cn(
+                  "text-white/80 text-sm md:text-base lg:text-lg leading-relaxed line-clamp-2 md:line-clamp-3 max-w-2xl drop-shadow-lg transition-opacity duration-300",
+                  isTransitioning ? "opacity-0" : "opacity-100",
+                )}
+              >
                 {currentMovie?.overview}
               </p>
 
