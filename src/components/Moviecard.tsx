@@ -1,5 +1,6 @@
 import { Calendar, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Movie } from "@/src/types/tmdb";
 
 interface MovieCardProps {
@@ -49,9 +50,12 @@ export function MovieCard({ movie }: MovieCardProps) {
             {movie.overview}
           </p>
 
-          <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-2.5 rounded-lg font-medium transition-colors">
+          <Link
+            href={`/movie/${movie.id}`}
+            className="w-full inline-block text-center bg-primary hover:bg-primary/90 text-primary-foreground py-2.5 rounded-lg font-medium transition-colors"
+          >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

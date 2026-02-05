@@ -3,6 +3,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { Calendar, ChevronLeft, ChevronRight, Globe, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/src/lib/utils";
 
@@ -149,9 +150,12 @@ export function HeroSection({ movies }: HeroSectionProps) {
               </p>
 
               <div>
-                <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3.5 rounded-lg font-semibold text-lg transition-all hover:scale-105 shadow-xl shadow-primary/30">
+                <Link
+                  href={`/movie/${currentMovie?.id}`}
+                  className="bg-primary/10 border border-primary hover:bg-primary/90 text-primary-foreground px-8 py-3.5 rounded-lg font-semibold text-lg transition-all hover:scale-105 shadow-xl shadow-primary/20"
+                >
                   Know More
-                </button>
+                </Link>
               </div>
             </div>
 
