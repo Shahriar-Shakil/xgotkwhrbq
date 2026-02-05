@@ -8,7 +8,7 @@ import { Button } from "@/src/components/ui/button";
 import { useTmdb } from "@/src/providers/tmdb-provider";
 import { Movie } from "@/src/types/tmdb";
 
-type ListType = "top-rated" | "popular" | "upcoming";
+type ListType = "top-rated" | "popular" | "upcoming" | "similar";
 
 interface MovieCarouselSectionProps {
   title: string;
@@ -76,6 +76,21 @@ export function MovieCarouselSection({
         setPage(nextPage);
       }
       setLoading(false);
+    } else if (listType === "similar") {
+      const response = await tmdb.movies.similar({
+        movie_id: movies[0]?.id || 0,
+        page: nextPage,
+      });
+      if (!response?.results || response.results.length === 0) {
+        setHasMore(false);
+      } else {
+        setMovies((prev) => [
+          ...prev,
+          ...response.results.sort((a, b) => b.popularity - a.popularity),
+        ]);
+        setPage(nextPage);
+      }
+      setLoading(false);
     }
   }, [tmdb, listType, page, loading, hasMore]);
 
@@ -122,9 +137,9 @@ export function MovieCarouselSection({
         {/* Carousel */}
         <div ref={emblaRef} className="overflow-x-hidden ">
           <div className="flex gap-4 ">
-            {movies.map((movie) => (
+            {movies.map((movie, i) => (
               <div
-                key={movie.id}
+                key={i}
                 className="flex-[0_0_70%] sm:flex-[0_0_45%] md:flex-[0_0_30%] lg:flex-[0_0_15%]"
               >
                 <MovieCard movie={movie} />

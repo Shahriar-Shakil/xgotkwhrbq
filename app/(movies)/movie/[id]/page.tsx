@@ -2,7 +2,7 @@ import { Calendar, Clock, Globe, Star } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { CastList } from "@/src/components/CastMember";
+import { CastList } from "@/src/components/CastList";
 import { MovieCarouselSection } from "@/src/components/MovieCarouselSection";
 import RecentlyViewedTracker from "@/src/components/RecentlyViewedTracker";
 import { tmdb } from "@/src/lib/tmdb";
@@ -57,7 +57,6 @@ export default async function MovieDetailsPage({
   const result = await tmdb.movies.credits({ movie_id: movieId });
 
   const cast = result?.cast || [];
-
   return (
     <>
       <RecentlyViewedTracker
