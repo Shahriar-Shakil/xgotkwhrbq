@@ -40,6 +40,11 @@ const navigationItems = [
     icon: List,
     href: "/genres",
   },
+  {
+    title: "Recently Viewed",
+    icon: Film,
+    href: "/recently-viewed",
+  },
 ];
 
 export function AppSidebar() {

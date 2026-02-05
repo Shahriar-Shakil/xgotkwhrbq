@@ -3,7 +3,7 @@
 import { Clock, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { MovieCard } from "@/components/Moviecard";
+import { MovieCard } from "@/src/components/Moviecard";
 
 interface Movie {
   id: number;
