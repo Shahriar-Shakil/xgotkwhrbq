@@ -10,7 +10,7 @@ interface MovieCardProps {
 export function MovieCard({ movie }: MovieCardProps) {
   const imageUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : "/placeholder-movie.jpg";
+    : "https://placehold.co/200x400";
 
   return (
     <div className="group relative overflow-hidden rounded-xl glass hover:glass-strong transition-all duration-600  hover:-translate-y-2">
@@ -43,7 +43,11 @@ export function MovieCard({ movie }: MovieCardProps) {
 
           <div className="flex items-center gap-2 text-white/80 text-sm mb-3">
             <Calendar className="w-4 h-4" />
-            <span>{new Date(movie.release_date).getFullYear()}</span>
+            <span>
+              {movie?.release_date
+                ? new Date(movie?.release_date).getFullYear()
+                : "Unknown Year"}
+            </span>
           </div>
 
           <p className="text-white/70 text-sm line-clamp-3 mb-4">
