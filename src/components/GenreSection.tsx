@@ -18,7 +18,7 @@ export function GenreSection({ genres }: GenreSectionProps) {
         {genres.map((genre) => (
           <Link
             key={genre.id}
-            href={`/genre/${genre.id}`}
+            href={`/genres/${genre.id}`}
             className="
               whitespace-nowrap
               rounded-full

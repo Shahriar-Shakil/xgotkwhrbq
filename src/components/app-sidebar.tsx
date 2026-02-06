@@ -29,7 +29,7 @@ const navigationItems = [
   {
     title: "Movies",
     icon: Clapperboard,
-    href: "/movies",
+    href: "/movie",
   },
   {
     title: "Genres",
