@@ -25,11 +25,7 @@ const navigationItems = [
     icon: Search,
     href: "/search",
   },
-  {
-    title: "OTT",
-    icon: Tv,
-    href: "/ott",
-  },
+
   {
     title: "Movies",
     icon: Clapperboard,
