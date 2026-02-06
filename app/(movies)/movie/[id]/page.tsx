@@ -48,10 +48,13 @@ export default async function MovieDetailsPage({
   const backdropUrl = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     : "";
+  const mobileBackdropUrl = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w780${movie.poster_path}`
+    : "";
   const posterUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
     : "";
-
+  console.log("mobileBackdropUrl", mobileBackdropUrl);
   const result = await tmdb.movies.credits({ movie_id: movieId });
 
   const cast = result?.cast || [];
@@ -75,13 +78,25 @@ export default async function MovieDetailsPage({
                 src={backdropUrl}
                 alt={movie.title}
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center hidden md:block transition-opacity duration-700 ease-in-out"
                 priority
                 quality={90}
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            {mobileBackdropUrl && (
+              <Image
+                src={mobileBackdropUrl}
+                alt={movie.title}
+                fill
+                className={
+                  "object-cover object-center block md:hidden transition-opacity duration-700 ease-in-out "
+                }
+                priority
+                sizes="100vw"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent" />
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
@@ -89,7 +104,7 @@ export default async function MovieDetailsPage({
             <div className="max-w-7xl w-full mx-auto">
               <div className="flex flex-col md:flex-row gap-8 items-end">
                 <div className="flex-shrink-0">
-                  <div className="relative w-48 h-48 md:w-64 md:h-96 rounded-xl overflow-hidden glass border-2 border-primary/30 shadow-2xl">
+                  <div className="relative hidden md:block w-48 h-48 md:w-64 md:h-96 rounded-xl overflow-hidden glass border-2 border-primary/30 shadow-2xl">
                     {posterUrl && (
                       <Image
                         src={posterUrl}
@@ -103,7 +118,7 @@ export default async function MovieDetailsPage({
                 </div>
 
                 <div className="flex-1 space-y-4 pb-4">
-                  <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
                     {movie.title}
                   </h1>
 
