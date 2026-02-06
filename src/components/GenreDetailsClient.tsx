@@ -3,8 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
-import { Movie } from "../types/tmdb";
-import { FilterState, SortOption } from "./AdvancedFilter";
+import { FilterState, Movie, SortOption } from "../types/tmdb";
 import { MovieCard } from "./Moviecard";
 import SortFilter from "./SortFilter";
 

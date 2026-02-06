@@ -28,3 +28,19 @@ export type Cast = {
   credit_id: string;
   order: number;
 };
+export type SortOption =
+  | "popularity.desc"
+  | "popularity.asc"
+  | "release_date.desc"
+  | "release_date.asc"
+  | "vote_average.desc"
+  | "vote_average.asc"
+  | "title.asc"
+  | "title.desc";
+export interface FilterState {
+  sortBy: SortOption;
+  yearFrom: string;
+  yearTo: string;
+  ratingFrom: number;
+  ratingTo: number;
+}
