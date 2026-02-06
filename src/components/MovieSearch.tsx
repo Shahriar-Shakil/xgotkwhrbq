@@ -142,9 +142,7 @@ export default function MovieSearch() {
                           setIsSearchFocused(false);
                         }}
                         style={{
-                          animationDelay: `${index * 0.05}s`,
-                          animation:
-                            "slide-in-from-left 0.3s ease-out backwards",
+                          animation: `slide-in-from-left 0.3s ease-out ${index * 0.05}s backwards`,
                         }}
                       >
                         {/* Poster */}

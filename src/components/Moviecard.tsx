@@ -50,9 +50,9 @@ export function MovieCard({ movie }: MovieCardProps) {
             </span>
           </div>
 
-          <p className="text-white/70 text-sm line-clamp-3 mb-4 hidden md:block">
+          {/* <p className="text-white/70 text-sm line-clamp-3 mb-4 hidden md:block">
             {movie.overview}
-          </p>
+          </p> */}
 
           <Link
             href={`/movie/${movie.id}`}
