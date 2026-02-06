@@ -49,7 +49,7 @@ export default async function MovieDetailsPage({
     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     : "";
   const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
     : "";
 
   const result = await tmdb.movies.credits({ movie_id: movieId });
@@ -89,7 +89,7 @@ export default async function MovieDetailsPage({
             <div className="max-w-7xl w-full mx-auto">
               <div className="flex flex-col md:flex-row gap-8 items-end">
                 <div className="flex-shrink-0">
-                  <div className="relative w-48 h-72 md:w-64 md:h-96 rounded-xl overflow-hidden glass border-2 border-primary/30 shadow-2xl">
+                  <div className="relative w-48 h-48 md:w-64 md:h-96 rounded-xl overflow-hidden glass border-2 border-primary/30 shadow-2xl">
                     {posterUrl && (
                       <Image
                         src={posterUrl}
@@ -103,7 +103,7 @@ export default async function MovieDetailsPage({
                 </div>
 
                 <div className="flex-1 space-y-4 pb-4">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
+                  <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
                     {movie.title}
                   </h1>
 
