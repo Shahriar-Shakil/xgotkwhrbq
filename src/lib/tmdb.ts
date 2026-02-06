@@ -1,42 +1,19 @@
 import { TMDB } from "@lorenzopant/tmdb";
+import {
+  AccountDetailsResponse,
+  AccountStatesResponse,
+  DiscoverMovieParams,
+  WatchlistMoviesResponse,
+  WatchlistResponse,
+} from "../types/tmdb";
 
 const apiKey = process.env.TMDB_API_KEY!;
-
-interface DiscoverMovieParams {
-  sort_by?:
-    | "popularity.asc"
-    | "popularity.desc"
-    | "release_date.asc"
-    | "release_date.desc"
-    | "vote_average.asc"
-    | "vote_average.desc"
-    | "title.asc"
-    | "title.desc";
-
-  // Pagination
-  page?: number;
-  language?: string;
-
-  // Genres
-  with_genres?: string;
-
-  "primary_release_date.gte"?: string;
-  "primary_release_date.lte"?: string;
-
-  "vote_average.gte"?: number;
-  "vote_average.lte"?: number;
-
-  [key: string]: any;
-}
 
 class ExtendedTMDB extends TMDB {
   async discoverMovieFull(params: DiscoverMovieParams) {
     const baseUrl = "https://api.themoviedb.org/3/discover/movie";
-
-    // Build query params
     const queryParams = new URLSearchParams();
 
-    // Add all params to query string
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== "") {
         queryParams.append(key, value.toString());
@@ -61,10 +38,115 @@ class ExtendedTMDB extends TMDB {
       throw error;
     }
   }
+
+  async getAccountDetails(sessionId: string): Promise<AccountDetailsResponse> {
+    const url = `https://api.themoviedb.org/3/account?session_id=${sessionId}`;
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+      next: { revalidate: 3600 },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch account details: ${response.statusText}`,
+      );
+    }
+
+    return response.json();
+  }
+
+  async toggleWatchlist(
+    accountId: string,
+    sessionId: string,
+    movieId: number,
+    addToWatchlist: boolean,
+  ): Promise<WatchlistResponse> {
+    const url = `https://api.themoviedb.org/3/account/${accountId}/watchlist`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        media_type: "movie",
+        media_id: movieId,
+        watchlist: addToWatchlist,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update watchlist: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  async getWatchlistMovies(
+    accountId: string,
+    sessionId: string,
+    page: number = 1,
+  ): Promise<WatchlistMoviesResponse> {
+    const url = `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?session_id=${sessionId}&page=${page}&sort_by=created_at.desc`;
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+      next: { revalidate: 0 },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch watchlist: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  async getMovieAccountStates(
+    movieId: number,
+    sessionId: string,
+  ): Promise<AccountStatesResponse> {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/account_states?session_id=${sessionId}`;
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+      next: { revalidate: 0 },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch account states: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
+  async checkMovieInWatchlist(
+    movieId: number,
+    sessionId: string,
+  ): Promise<boolean> {
+    try {
+      const states = await this.getMovieAccountStates(movieId, sessionId);
+      return states.watchlist === true;
+    } catch (error) {
+      console.error("Error checking watchlist status:", error);
+      return false;
+    }
+  }
 }
 
-// Export extended instance
 export const tmdb = new ExtendedTMDB(apiKey) as ExtendedTMDB & TMDB;
 
-// Export types
-export type { DiscoverMovieParams };
+export type {
+  DiscoverMovieParams,
+  WatchlistResponse,
+  AccountStatesResponse,
+  WatchlistMoviesResponse,
+  AccountDetailsResponse,
+};
