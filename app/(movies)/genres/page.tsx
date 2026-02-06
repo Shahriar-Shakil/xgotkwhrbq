@@ -12,7 +12,7 @@ export default async function GenresPage() {
 
   // Fetch a sample movie for each genre to use as backdrop
   const genresWithImages = await Promise.all(
-    genres.map(async (genre) => {
+    genres.map(async (genre, i) => {
       try {
         const movies = await tmdb.discoverMovieFull({
           with_genres: genre.id.toString(),
@@ -22,7 +22,7 @@ export default async function GenresPage() {
         console.log(`Fetched movies for genre: ${genre.name}`);
         return {
           ...genre,
-          backdrop: movies.results[0]?.backdrop_path || null,
+          backdrop: movies.results[i]?.backdrop_path || null,
         };
       } catch (error) {
         return {
