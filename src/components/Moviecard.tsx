@@ -25,7 +25,7 @@ export function MovieCard({ movie }: MovieCardProps) {
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-600" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-600" />
 
         {/* Rating Badge */}
         <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full">
@@ -36,7 +36,7 @@ export function MovieCard({ movie }: MovieCardProps) {
         </div>
 
         {/* Hover Content */}
-        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-600">
+        <div className="absolute inset-x-0 bottom-0 p-4 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-600">
           <h3 className="text-white font-bold text-lg mb-2 line-clamp-2">
             {movie.title}
           </h3>
@@ -50,13 +50,13 @@ export function MovieCard({ movie }: MovieCardProps) {
             </span>
           </div>
 
-          <p className="text-white/70 text-sm line-clamp-3 mb-4">
+          <p className="text-white/70 text-sm line-clamp-3 mb-4 hidden md:block">
             {movie.overview}
           </p>
 
           <Link
             href={`/movie/${movie.id}`}
-            className="w-full inline-block text-center bg-primary hover:bg-primary/90 text-primary-foreground py-2.5 rounded-lg font-medium transition-colors"
+            className="w-full inline-block text-center bg-primary hover:bg-primary/90 text-primary-foreground py-1.5 md:py-2.5 rounded-lg font-normal md:font-medium transition-colors"
           >
             View Details
           </Link>

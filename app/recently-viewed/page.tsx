@@ -4,14 +4,7 @@ import { Clock, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MovieCard } from "@/src/components/Moviecard";
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string | null;
-  vote_average: number;
-  release_date: string;
-}
+import { Movie } from "@/src/types/tmdb";
 
 export default function RecentlyViewedPage() {
   const [movies, setMovies] = useState<Movie[]>([]);

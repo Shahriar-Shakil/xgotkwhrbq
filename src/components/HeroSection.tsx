@@ -66,20 +66,38 @@ export function HeroSection({ movies }: HeroSectionProps) {
     ? `https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`
     : "";
 
+  const posterUrl = currentMovie?.poster_path
+    ? `https://image.tmdb.org/t/p/w780${currentMovie.poster_path}`
+    : "";
   return (
-    <div className="relative w-full h-full md:h-[80vh] lg:h-[85vh] overflow-hidden">
-      <div className="absolute inset-0 -top-1/2 md:top-0">
+    <div className="relative  h-full md:h-[80vh] lg:h-[85vh] overflow-hidden">
+      <div className="absolute w-full inset-0 top-0 md:top-0">
+        {/* Mobile Image - Portrait Poster */}
         <Image
-          key={currentIndex}
+          key={`mobile-${currentIndex}`}
+          src={posterUrl}
+          alt={currentMovie?.title || "Movie poster"}
+          fill
+          className={cn(
+            "object-cover object-center transition-opacity duration-700 ease-in-out md:hidden",
+            isTransitioning ? "opacity-0" : "opacity-100",
+          )}
+          priority
+          sizes="100vw"
+        />
+
+        {/* Desktop Image - Landscape Backdrop */}
+        <Image
+          key={`desktop-${currentIndex}`}
           src={backdropUrl}
           alt={currentMovie?.title || "Movie backdrop"}
           fill
           className={cn(
-            "object-contain md:object-cover object-center transition-opacity duration-700 ease-in-out",
+            "hidden md:block object-cover object-center transition-opacity duration-700 ease-in-out",
             isTransitioning ? "opacity-0" : "opacity-100",
           )}
           priority
-          quality={90}
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />

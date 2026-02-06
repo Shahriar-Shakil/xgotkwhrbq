@@ -30,8 +30,6 @@ export default async function MovieDetailsPage({
   // Fetch similar movies
   const similarMovies = await tmdb.movies.similar({ movie_id: movieId });
 
-  const genreNames = movie.genres?.map((g) => g.name).join(", ") || "N/A";
-
   const formatRuntime = (minutes: number | null) => {
     if (!minutes) return "N/A";
     const hours = Math.floor(minutes / 60);
@@ -70,9 +68,7 @@ export default async function MovieDetailsPage({
       />
 
       <div className="min-h-screen">
-        {/* Hero Section with Backdrop */}
         <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
-          {/* Backdrop Image */}
           <div className="absolute inset-0">
             {backdropUrl && (
               <Image
@@ -84,17 +80,14 @@ export default async function MovieDetailsPage({
                 quality={90}
               />
             )}
-            {/* Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
-          {/* Content */}
           <div className="relative z-10 h-full flex items-end pb-12 px-4 md:px-8 lg:px-12">
             <div className="max-w-7xl w-full mx-auto">
               <div className="flex flex-col md:flex-row gap-8 items-end">
-                {/* Poster */}
                 <div className="flex-shrink-0">
                   <div className="relative w-48 h-72 md:w-64 md:h-96 rounded-xl overflow-hidden glass border-2 border-primary/30 shadow-2xl">
                     {posterUrl && (
@@ -109,13 +102,11 @@ export default async function MovieDetailsPage({
                   </div>
                 </div>
 
-                {/* Info */}
                 <div className="flex-1 space-y-4 pb-4">
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
                     {movie.title}
                   </h1>
 
-                  {/* Meta Info */}
                   <div className="flex flex-wrap items-center gap-4 text-white/90">
                     <div className="flex items-center gap-2 glass-subtle px-3 py-1.5 rounded-full">
                       <Calendar className="w-4 h-4" />
