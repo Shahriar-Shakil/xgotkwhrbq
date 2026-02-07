@@ -23,7 +23,6 @@ export default async function MovieDetailsPage({
 
   // Fetch movie details
   const movie = await tmdb.movies.details({ movie_id: movieId });
-  console.log("Movie details:", movie);
   if (!movie) {
     notFound();
   }
