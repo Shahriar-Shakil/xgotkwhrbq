@@ -1,4 +1,5 @@
 import { SidebarTrigger } from "@/src/components/ui/sidebar";
+import LoginButton from "./LoginButton";
 import MovieSearch from "./MovieSearch";
 
 export default function Header() {
@@ -19,7 +20,9 @@ export default function Header() {
               <MovieSearch />
             </div>
 
-            <div className="flex-shrink-0"></div>
+            <div className="flex-shrink-0">
+              <LoginButton />
+            </div>
           </div>
         </div>
       </header>
