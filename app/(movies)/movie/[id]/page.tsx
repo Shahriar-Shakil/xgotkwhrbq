@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { CastList } from "@/src/components/CastList";
 import { MovieCarouselSection } from "@/src/components/MovieCarouselSection";
 import RecentlyViewedTracker from "@/src/components/RecentlyViewedTracker";
+import WatchlistButton from "@/src/components/Watchlistbutton";
 import { tmdb } from "@/src/lib/tmdb";
 
 interface MovieDetailsPageProps {
@@ -22,7 +23,7 @@ export default async function MovieDetailsPage({
 
   // Fetch movie details
   const movie = await tmdb.movies.details({ movie_id: movieId });
-
+  console.log("Movie details:", movie);
   if (!movie) {
     notFound();
   }
@@ -122,7 +123,7 @@ export default async function MovieDetailsPage({
                     {movie.title}
                   </h1>
 
-                  <div className="flex flex-wrap items-center gap-4 text-white/90">
+                  <div className="flex flex-wrap items-center gap-4 text-white/90 ">
                     <div className="flex items-center gap-2 glass-subtle px-3 py-1.5 rounded-full">
                       <Calendar className="w-4 h-4" />
                       <span className="text-sm font-medium">
@@ -158,6 +159,7 @@ export default async function MovieDetailsPage({
                           : "N/A"}
                       </span>
                     </div>
+                    <WatchlistButton movie={movie} variant="icon" />
                   </div>
 
                   {/* Genres */}

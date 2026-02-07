@@ -112,7 +112,7 @@ export default function LoginButton() {
                 className="flex items-center gap-3 px-4 py-2.5 hover:bg-muted/30 transition-colors"
               >
                 <Bookmark className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm">Watch Later</span>
+                <span className="text-sm">Watch List</span>
               </Link>
 
               <Link

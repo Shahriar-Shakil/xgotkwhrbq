@@ -44,11 +44,11 @@ export default function Toast({
   };
 
   return (
-    <div className="fixed top-0 right-4 z-[100] animate-in slide-in-from-top-2 fade-in duration-300">
+    <div className="fixed top-1/2 -translate-y-1/2 right-4 z-[100] animate-in slide-in-from-top-2 fade-in duration-300">
       <div
         className={`
-          glass-strong border rounded-xl px-4 py-3 shadow-2xl 
-          flex items-center gap-3 min-w-[280px] max-w-[400px]
+          glass-strong border rounded-xl px-2 py-2 shadow-2xl 
+          flex items-center gap-3 min-w-[220px] max-w-[400px]
           ${bgMap[type]}
         `}
       >

@@ -2,6 +2,7 @@ import { Calendar, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Movie } from "../types/tmdb";
+import WatchlistButton from "./Watchlistbutton";
 
 interface MovieCardHorizontalProps {
   movie: Movie;
@@ -74,12 +75,15 @@ export function MovieCardHorizontal({ movie }: MovieCardHorizontalProps) {
               )}
             </div>
 
-            <Link
-              href={`/movie/${movie.id}`}
-              className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2.5 rounded-lg font-medium transition-colors"
-            >
-              View Details
-            </Link>
+            <div className="flex items-center gap-4">
+              <WatchlistButton movie={movie} variant="button" />
+              <Link
+                href={`/movie/${movie.id}`}
+                className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2.5 rounded-lg font-medium transition-colors"
+              >
+                View Details
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import MovieSearch from "./MovieSearch";
 export default function Header() {
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-border/40">
+      <header className="fixed top-0  z-50 w-full backdrop-blur-sm  border-b border-border/40">
         <div className="mx-auto max-w-7xl px-4 py-3">
           <div className="flex items-center gap-3 md:gap-4">
             {/* Sidebar Trigger */}
