@@ -8,7 +8,7 @@ import { Button } from "@/src/components/ui/button";
 import { useTmdb } from "@/src/providers/tmdb-provider";
 import { Movie } from "@/src/types/tmdb";
 
-type ListType = "top-rated" | "popular" | "upcoming" | "similar";
+type ListType = "top-rated" | "popular" | "upcoming" | "similar" | "genre";
 
 interface MovieCarouselSectionProps {
   title: string;
@@ -91,6 +91,10 @@ export function MovieCarouselSection({
         setPage(nextPage);
       }
       setLoading(false);
+    } else if (listType === "genre") {
+      setHasMore(false);
+      setLoading(false);
+      return;
     }
   }, [tmdb, listType, page, loading, hasMore]);
 
