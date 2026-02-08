@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MovieCard } from "@/src/components/Moviecard";
 import { getUserWatchlist } from "@/src/lib/watchlist";
-import { useAuth } from "@/src/providers/AuthContext";
-import { useWatchlist } from "@/src/providers/Watchlistprovider";
+import { useAuth } from "@/src/providers/authContext";
+import { useWatchlist } from "@/src/providers/watchlistprovider";
 import { Movie } from "@/src/types/tmdb";
 
 export default function WatchlistPage() {

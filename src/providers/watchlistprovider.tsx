@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { getUserWatchlistIds } from "@/src/lib/watchlist";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./authContext";
 
 interface WatchlistContextType {
   watchlistIds: Set<number>;

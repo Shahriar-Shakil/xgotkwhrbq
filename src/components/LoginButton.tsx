@@ -5,7 +5,7 @@ import { Bookmark, Clock, LogIn, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { auth } from "@/src/lib/firebase";
-import { useAuth } from "../providers/AuthContext";
+import { useAuth } from "../providers/authContext";
 
 export default function LoginButton() {
   const { user } = useAuth();

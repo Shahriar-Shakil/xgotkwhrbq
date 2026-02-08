@@ -4,8 +4,8 @@ import { Bookmark, BookmarkCheck, X as XIcon } from "lucide-react";
 import { useState, useTransition } from "react";
 import { addToWatchlist, removeFromWatchlist } from "@/src/lib/watchlist";
 import { Movie } from "@/src/types/tmdb";
-import { useAuth } from "../providers/AuthContext";
-import { useWatchlist } from "../providers/Watchlistprovider";
+import { useAuth } from "../providers/authContext";
+import { useWatchlist } from "../providers/watchlistprovider";
 import Toast from "./Toast";
 
 interface WatchlistButtonProps {
