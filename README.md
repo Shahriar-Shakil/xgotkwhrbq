@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cinephile 🎬
 
-## Getting Started
+A modern movie discovery platform built with Next.js 16, featuring real-time data from TMDB API and Firebase authentication for personalized watchlists.
 
-First, run the development server:
+**Live Demo:** [https://cinephile-shahriar.vercel.app/](https://cinephile-shahriar.vercel.app/)
+
+## Features
+
+### 🏠 Home Page
+- Top Rated Movies showcase
+- Popular movies by genre (5 per genre)
+- Complete genre navigation
+
+### 🎭 Genre Page
+- Browse movies by specific genre
+- Sort by: popularity, release date, rating, or title
+- Infinite scroll for all movies
+
+### 📽️ Movie Details
+- Full movie information (poster, title, overview, release date, rating, runtime)
+- Complete cast list
+- Similar movies by genre
+- Auto-saves to recently viewed
+
+### 🕒 Recently Viewed
+- Track your browsing history
+- Stored locally (no login required)
+
+### ⭐ Watch Later
+- Personal watchlist with Firebase sync
+- Add/remove movies instantly
+- Requires authentication
+
+### 🔍 Search
+- Real-time movie search
+- Responsive grid layout
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS 4
+- **UI Components:** Radix UI, Lucide React
+- **API:** TMDB (@lorenzopant/tmdb)
+- **Database:** Firebase (Authentication & Firestore)
+- **Deployment:** Vercel
+
+## Installation
 
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+cd cinephile
+
+# Install dependencies
+npm install
+
+# Set up environment variables (see below)
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root directory:
 
-## Learn More
+```env
+# TMDB API (Get from https://www.themoviedb.org/settings/api)
+TMDB_API_KEY=your_tmdb_api_key_here
 
-To learn more about Next.js, take a look at the following resources:
+# Firebase Config (Get from Firebase Console > Project Settings)
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Site URL (for production)
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Getting API Keys
 
-## Deploy on Vercel
+**TMDB API:**
+1. Create account at [themoviedb.org](https://www.themoviedb.org/)
+2. Go to Settings → API → Create API Key
+3. Copy the API Read Access Token (v4 auth)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Firebase:**
+1. Create project at [console.firebase.google.com](https://console.firebase.google.com/)
+2. Enable Authentication (Email/Password or Google Sign-in)
+3. Create Firestore Database
+4. Copy config from Project Settings → General
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Data Storage
+
+- **Recently Viewed:** Saved in browser localStorage (persists locally, no login needed)
+- **Watch Later:** Synced to Firebase Firestore (requires authentication, accessible across devices)
+
+## Scripts
+
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm start        # Start production server
+npm run lint     # Run ESLint
+```
+
+## Project Structure
+
+```
+cinephile/
+├── src/
+│   ├── app/              # Next.js app routes
+│   ├── components/       # React components
+│   ├── lib/             # Utilities (TMDB, Firebase)
+│   └── hooks/           # Custom React hooks
+├── public/              # Static assets
+└── .env.local          # Environment variables
+```
+
+## License
+
+MIT
+
+---
+
+Built with ❤️ using Next.js and TMDB
