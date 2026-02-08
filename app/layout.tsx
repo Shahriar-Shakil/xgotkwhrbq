@@ -18,7 +18,41 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://Cinephile.com",
+  ),
+  title: {
+    default: "Cinephile - Discover Movies, TV Shows & Entertainment",
+    template: "%s | Cinephile",
+  },
+  description:
+    "Your ultimate destination for discovering movies, TV shows, and entertainment content.",
+  applicationName: "Cinephile",
+  referrer: "origin-when-cross-origin",
+  keywords: ["movies", "tv shows", "entertainment", "cinema", "streaming"],
+  authors: [{ name: "Cinephile" }],
+  creator: "Cinephile",
+  publisher: "Cinephile",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Cinephile",
+  },
+};
 export default function RootLayout({
   children,
 }: Readonly<{
