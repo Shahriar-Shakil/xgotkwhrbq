@@ -7,31 +7,37 @@ A modern movie discovery platform built with Next.js 16, featuring real-time dat
 ## Features
 
 ### 🏠 Home Page
+
 - Top Rated Movies showcase
 - Popular movies by genre (5 per genre)
 - Complete genre navigation
 
 ### 🎭 Genre Page
+
 - Browse movies by specific genre
 - Sort by: popularity, release date, rating, or title
 - Infinite scroll for all movies
 
 ### 📽️ Movie Details
+
 - Full movie information (poster, title, overview, release date, rating, runtime)
 - Complete cast list
 - Similar movies by genre
 - Auto-saves to recently viewed
 
 ### 🕒 Recently Viewed
+
 - Track your browsing history
 - Stored locally (no login required)
 
 ### ⭐ Watch Later
+
 - Personal watchlist with Firebase sync
 - Add/remove movies instantly
 - Requires authentication
 
 ### 🔍 Search
+
 - Real-time movie search
 - Responsive grid layout
 
@@ -85,11 +91,13 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ### Getting API Keys
 
 **TMDB API:**
+
 1. Create account at [themoviedb.org](https://www.themoviedb.org/)
 2. Go to Settings → API → Create API Key
 3. Copy the API Read Access Token (v4 auth)
 
 **Firebase:**
+
 1. Create project at [console.firebase.google.com](https://console.firebase.google.com/)
 2. Enable Authentication (Email/Password or Google Sign-in)
 3. Create Firestore Database
@@ -113,13 +121,24 @@ npm run lint     # Run ESLint
 
 ```
 cinephile/
+├── app/
+│   ├── (movies)/           # Movie routes group
+│   │   ├── genres/         # Genre pages
+│   │   ├── movie/          # Movie details
+│   │   ├── search/         # Search functionality
+│   │   └── watchlist/      # Watchlist page
+│   ├── recently-viewed/    # Recently viewed page
+│   ├── layout.tsx          # Root layout
+│   └── globals.css         # Global styles
 ├── src/
-│   ├── app/              # Next.js app routes
-│   ├── components/       # React components
-│   ├── lib/             # Utilities (TMDB, Firebase)
-│   └── hooks/           # Custom React hooks
-├── public/              # Static assets
-└── .env.local          # Environment variables
+│   ├── components/         # React components
+│   │   └── ui/            # UI primitives (shadcn)
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utilities (TMDB, Firebase, Watchlist)
+│   ├── providers/         # Context providers (Auth, Theme, Watchlist)
+│   └── types/             # TypeScript definitions
+├── public/                # Static assets
+└── .env.local            # Environment variables
 ```
 
 ## License
