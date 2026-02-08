@@ -34,7 +34,6 @@ const navigationItems = [
     icon: Search,
     href: "/search",
   },
-
   {
     title: "Movies",
     icon: Clapperboard,
@@ -61,23 +60,23 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-white/10 ">
-      <SidebarHeader className="border-b border-white/10 p-4">
+    <Sidebar collapsible="icon" className="border-r border-border/50">
+      <SidebarHeader className="border-b border-border/50 p-4">
         <Link
           href="/"
           className="flex items-center gap-3 group transition-all duration-200"
         >
           <div className="relative shrink-0">
             <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-pink-500 to-purple-500 rounded-lg blur-md opacity-60 group-hover:opacity-100 transition-opacity" />
-            <div className="relative bg-gradient-to-br from-red-600 via-pink-600 to-purple-600 p-2 rounded-lg">
+            <div className="relative bg-gradient-to-br from-red-600 via-pink-600 to-purple-600 p-2 rounded-lg shadow-lg">
               <Film className="w-5 h-5 text-white" strokeWidth={2.5} />
             </div>
           </div>
           <div className="group-data-[collapsible=icon]:hidden">
-            <h1 className="text-lg font-black tracking-tight text-white">
+            <h1 className="text-lg font-black tracking-tight text-foreground dark:text-white">
               CINEPHILE
             </h1>
-            <p className="text-[9px] font-semibold text-red-500 tracking-widest uppercase -mt-0.5">
+            <p className="text-[9px] font-semibold text-red-600 dark:text-red-500 tracking-widest uppercase -mt-0.5">
               Movie DB
             </p>
           </div>
@@ -99,13 +98,13 @@ export function AppSidebar() {
                       relative my-1 py-2 h-10 rounded-xl transition-all duration-200
                       ${
                         isActive
-                          ? "bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-500 hover:to-pink-500"
-                          : "text-white/70 hover:text-white hover:bg-white/10"
+                          ? "bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-500 hover:to-pink-500 shadow-md dark:shadow-none"
+                          : "text-slate-700 dark:text-white/70 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/70 dark:hover:bg-white/10"
                       }
                     `}
                   >
                     <Link href={item.href} className="flex items-center gap-3">
-                      <item.icon className="w-8 h-8" strokeWidth={2} />
+                      <item.icon className="w-5 h-5" strokeWidth={2} />
                       <span className="font-semibold">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
